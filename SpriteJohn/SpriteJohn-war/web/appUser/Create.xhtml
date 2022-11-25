@@ -16,13 +16,16 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreateAppUserLabel_groupname}" for="groupname" />
-                    <h:inputText id="groupname" value="#{appUserController.selected.groupname}" title="#{bundle.CreateAppUserTitle_groupname}" />
+                    <h:inputText id="groupname" value="#{appUserController.selected.groupname}" title="#{bundle.CreateAppUserTitle_groupname}" 
+                                 required="true" requiredMessage="#{bundle.CreateAppUserRequiredMessage_GN}"/>
                                
                     <h:outputLabel value="#{bundle.CreateAppUserLabel_userid}" for="userid" />
-                    <h:inputText id="userid" value="#{appUserController.selected.userid}" title="#{bundle.CreateAppUserTitle_userid}" />                       
+                    <h:inputText id="userid" value="#{appUserController.selected.userid}" title="#{bundle.CreateAppUserTitle_userid}" 
+                                 required="true" requiredMessage="#{bundle.CreateAppUserRequiredMessage_UN}"/>                       
                     
                     <h:outputLabel value="#{bundle.CreateAppUserLabel_password}" for="password" />
-                    <h:inputSecret id="password" value="#{appUserController.selected.password}" title="#{bundle.CreateAppUserTitle_password}" />
+                    <h:inputSecret id="password" value="#{appUserController.selected.password}" title="#{bundle.CreateAppUserTitle_password}" 
+                                   required="true" requiredMessage="#{bundle.CreateAppUserRequiredMessage_PS}"/>
                     
                     
                     

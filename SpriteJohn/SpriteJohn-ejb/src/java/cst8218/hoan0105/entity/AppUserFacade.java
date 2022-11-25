@@ -26,6 +26,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author J-PC
  */
+//For FORM comment out DeclareROLES and ROLES ALLOWED
 @DeclareRoles({"Admin","RestGroup","JsfGroup"})
 @RolesAllowed({"Admin","JsfGroup"})
 @Stateless
