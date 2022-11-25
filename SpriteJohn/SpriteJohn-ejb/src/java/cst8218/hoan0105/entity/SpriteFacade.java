@@ -23,7 +23,8 @@ import javax.ws.rs.core.Response;
  * EJB use for restful HTTP requests
  * @author J-PC
  */
-//changes made = changed path to my ejb entity sprite 
+
+//for FORM AUTH comment out DeclareRoles and Roles Allowed
 @DeclareRoles({"Admin","RestGroup","JsfGroup"})
 @RolesAllowed({"Admin","RestGroup","JsfGroup"})
 @javax.ejb.Stateless
