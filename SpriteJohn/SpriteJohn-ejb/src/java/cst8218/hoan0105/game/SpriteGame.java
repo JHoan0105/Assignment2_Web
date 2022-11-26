@@ -6,6 +6,9 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
+import javax.ejb.Asynchronous;
 import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
 
@@ -22,6 +25,8 @@ import javax.ejb.Startup;
 //start the singleton on application startup --- concurrency to make sure asynchronise
 @Singleton
 @Startup
+@RunAs("Admin")
+@RolesAllowed({"Admin","RestGroup","JsfGroup"})
 @ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
 public class SpriteGame {
 

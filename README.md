@@ -1,3 +1,59 @@
+NOVEMBER 26 UPDATE
+
+Client login gui working and authentication working
+ASYNC working on faces can update and create new sprites without breaking
+
+Need to implement access for remote access
+-JAAS ?
+
+some resources
+	https://www.virtuozzo.com/application-platform-docs/remote-access-to-ejb-glassfish/
+	https://docs.oracle.com/middleware/1221/wls/SCPRG/fat_client.htm#SCPRG224
+
+
+=======================================================================
+
+NOVEMBER
+
+NOTE - YOU MAY HAVE TO CLEAR CACHE EVERYTIME YOU ENTER PASSWORD
+	on ERROR OR LOGIN
+
+FOR BASIC AUTH
+
+Make sure to have appuser users 
+	with group name "Admin" or "RestGroup" or "JsfGroup"
+
+=======================================================================
+
+TO TEST FORM AUTH
+
+go to Glassfish server -> server security -> realm -> file
+								add user
+								add user and groupname 
+								(group name mapped to role-name in config)
+go to ejb ->
+	Source Packages ->
+			entity ->
+				-AppUserFacade
+				-SpriteFacade
+				//comment the declared roles and Roles allowed
+
+go to ejb ->
+	Source Packages ->
+			service ->
+				ApplicationCOnfig
+				//comment all annotation on class EXCEPT APplicationPATH
+
+got to war ->
+	Web Pages ->
+		 WEB-INF ->
+			web.xml
+			//comment out first 2 section of security constraint
+			and uncomment <login-config> section with security constraint
+				
+
+==============================================================================================
+
 # Assignment2_Web
 Group Project for Assignment 2 in Web Enterprise Applications
 
