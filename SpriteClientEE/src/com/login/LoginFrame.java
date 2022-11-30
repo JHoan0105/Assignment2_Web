@@ -20,9 +20,11 @@ public class LoginFrame extends JFrame implements ActionListener{
 	JCheckBox showPassword=new JCheckBox("Show Password");
 	Authentication auth;
 	Credential cre;
-	SpriteGame sprite;
+	private String usr;
+	private String pwd;
+
  
-	LoginFrame(Credential cred,SpriteGame ss){
+	LoginFrame(Credential cred){
 		//Calling setLayoutManger() method inside the constructor.
         setLayoutManager();
         setLocationAndSize();
@@ -30,7 +32,8 @@ public class LoginFrame extends JFrame implements ActionListener{
         addActionEvent();
         auth = new Authentication();
         cre = cred;
-        sprite = ss;
+        
+
 	}
 			
 	public void setLayoutManager(){
@@ -72,24 +75,17 @@ public class LoginFrame extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 		//Coding Part of LOGIN button
 		if (e.getSource() == loginButton) {
-			String usr;
-			String pwd;
 			usr = userTextField.getText();
 			pwd = passwordField.getText();
 
 			if (auth.bacicAuth(usr, pwd)) {
-				JOptionPane.showMessageDialog(this, "Login Successful");
-				cre.setUsrpwd(auth.getCredential(usr, pwd));
-				cre.setCredential(auth.getBasicAuthEncode(usr, pwd));
-				cre.setGoodToGo(true);
-				sprite = new SpriteGame(cre);
 				
+				cre.setGoodToGo(true);
 				//this.dispose();
+				JOptionPane.showMessageDialog(this, "Login Successful");
 				this.close();
 			} else {
 				JOptionPane.showMessageDialog(this, "Invalid Username or Password");
-				userTextField.setText("");
-				passwordField.setText("");
 			}
 		}
 		//Coding Part of RESET button

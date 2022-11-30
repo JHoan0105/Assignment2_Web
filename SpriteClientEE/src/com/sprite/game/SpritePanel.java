@@ -17,7 +17,7 @@ public class SpritePanel extends JPanel implements Runnable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	List<Sprite> sprites;
 	SpriteSessionRemote session;
 	int counter = 0;
@@ -39,6 +39,8 @@ public class SpritePanel extends JPanel implements Runnable{
 				}
 				counter++;
 				counter= counter>=1000?0:counter;
+				
+				
 				}catch(javax.ejb.NoSuchEJBException e){
 					System.out.println("Lost contact with server, exiting...");
 					e.printStackTrace();

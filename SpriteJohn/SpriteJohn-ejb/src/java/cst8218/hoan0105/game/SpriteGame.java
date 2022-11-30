@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.annotation.security.RunAs;
 import javax.ejb.Asynchronous;
@@ -26,7 +27,7 @@ import javax.ejb.Startup;
 @Singleton
 @Startup
 @RunAs("Admin")
-@RolesAllowed({"Admin","RestGroup","JsfGroup"})
+@PermitAll
 @ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
 public class SpriteGame {
 
@@ -59,6 +60,11 @@ public class SpriteGame {
             spriteFacade.edit(sprite);
         }
     }
+    @Lock(LockType.WRITE)
+    public void editSprite(Long id,Sprite newsprite){
+        spriteFacade.edit(id,newsprite);
+    }
+    
 
     @PostConstruct
     public void go() {

@@ -20,4 +20,5 @@ public interface SpriteSessionRemote {
 	void newSprite(MouseEvent e) throws RemoteException;
 	int getHeight() throws RemoteException;
 	int getWidth() throws RemoteException;
+        void setSprite(Long id,Sprite newsprite) throws RemoteException;
 }

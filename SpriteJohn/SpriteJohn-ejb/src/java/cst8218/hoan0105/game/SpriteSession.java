@@ -3,6 +3,7 @@ package cst8218.hoan0105.game;
 import cst8218.hoan0105.entity.Sprite;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.EJB;
@@ -38,4 +39,10 @@ public class SpriteSession implements SpriteSessionRemote {
     public int getWidth() {
         return spriteGame.WIDTH;
     }
+
+    @Override
+    public void setSprite(Long id,Sprite newsprite) {
+        spriteGame.editSprite(id,newsprite);
+    }
+
 }
