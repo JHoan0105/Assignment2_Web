@@ -22,12 +22,30 @@
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
     <!--for basic authentication uncomment-->
-    <security-constraint>
+        <security-constraint>
         <display-name>AdminConstraint</display-name>
         <web-resource-collection>
-        <web-resource-name>applicationfaces</web-resource-name>
+        <web-resource-name>application</web-resource-name>
         <description>Administration area</description>
+        <url-pattern>/*</url-pattern>
+        <http-method>GET</http-method>
+        <http-method>POST</http-method>
+        <http-method>PUT</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>Basic Constraint</description>
+            <role-name>Admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>JSFConstraint</display-name>
+        <web-resource-collection>
+        <web-resource-name>applicationfaces</web-resource-name>
+        <description>FACES ACCESS</description>
         <url-pattern>/faces/*</url-pattern>
+        <http-method>GET</http-method>
+        <http-method>POST</http-method>
+        <http-method>PUT</http-method>
         </web-resource-collection>
         <auth-constraint>
             <description>Basic Constraint</description>
@@ -36,11 +54,14 @@
         </auth-constraint>
     </security-constraint>
     <security-constraint>
-        <display-name>AdminConstraint</display-name>
+        <display-name>RESTConstraint</display-name>
         <web-resource-collection>
         <web-resource-name>applicationrest</web-resource-name>
-        <description>Administration area</description>
+        <description>REST ACCESS</description>
         <url-pattern>/webresources/*</url-pattern>
+        <http-method>GET</http-method>
+        <http-method>POST</http-method>
+        <http-method>PUT</http-method>
         </web-resource-collection>
         <auth-constraint>
             <description>Basic Constraint</description>

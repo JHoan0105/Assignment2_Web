@@ -8,6 +8,7 @@ package cst8218.hoan0105.entity;
 import java.util.List;
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.Asynchronous;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
@@ -25,6 +26,7 @@ import javax.ws.rs.core.Response;
  */
 
 //for FORM AUTH comment out DeclareRoles and Roles Allowed
+
 @DeclareRoles({"Admin","RestGroup","JsfGroup"})
 @RolesAllowed({"Admin","RestGroup","JsfGroup"})
 @javax.ejb.Stateless
@@ -121,20 +123,21 @@ public class SpriteFacade extends AbstractFacade<Sprite> {
        return Response.status(Response.Status.OK).entity(super.find(entity.getId())).build(); 
     }//end edit
 */
+    @Asynchronous
     @javax.ws.rs.POST
     @Override
     @javax.ws.rs.Consumes({javax.ws.rs.core.MediaType.APPLICATION_XML, javax.ws.rs.core.MediaType.APPLICATION_JSON})
     public void create(Sprite entity) {
         super.create(entity);
     }
-
+    @Asynchronous
     @javax.ws.rs.PUT
     @javax.ws.rs.Path("{id}")
     @javax.ws.rs.Consumes({javax.ws.rs.core.MediaType.APPLICATION_XML, javax.ws.rs.core.MediaType.APPLICATION_JSON})
     public void edit(@javax.ws.rs.PathParam("id") Long id, Sprite entity) {
         super.edit(entity);
     }
-
+    @Asynchronous
     @javax.ws.rs.DELETE
     @javax.ws.rs.Path("{id}")
     public void remove(@javax.ws.rs.PathParam("id") Long id) {
