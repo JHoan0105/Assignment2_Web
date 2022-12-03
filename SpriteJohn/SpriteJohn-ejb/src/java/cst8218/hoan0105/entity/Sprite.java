@@ -61,12 +61,14 @@ public class Sprite implements Serializable {
     }
     
     //add minium constraint and initialized
-    @Min(value=500,message="panelWidth must be greater than {value}")
+    @Max(value=500,message="panelWidth must be less than {value}")
+    @Min(value=0,message="Dx must be greater than {value}")
     @Column
     private int panelWidth=500;
     
     //add minium constraint and initialized
-    @Min(value=500,message="panelHeight must be greater than {value}")
+    @Max(value=500,message="panelHeight must be less than {value}")
+    @Min(value=0,message="Dx must be greater than {value}")
     @Column
     private int panelHeight=500;
     
@@ -79,14 +81,14 @@ public class Sprite implements Serializable {
     private int y=random.nextInt(panelHeight);
     
     //constraint on moving in the x direction
-    @Min(value=-5,message="y must be greater than {value}")
-    @Max(value=5,message="y must be greater than {value}")
+    @Min(value=-5,message="Dx must be greater than {value}")
+    @Max(value=5,message="Dx must be less than {value}")
     @Column
     private int dx=random.nextInt(2 * MAX_SPEED) - MAX_SPEED;
     
     //constraint on moving on the y directiom
-    @Min(value=-5,message="y must be greater than {value}")
-    @Max(value=5,message="y must be greater than {value}")
+    @Min(value=-5,message="Dy must be greater than {value}")
+    @Max(value=5,message="Dy must be less than {value}")
     @Column
     private int dy=random.nextInt(2 * MAX_SPEED) - MAX_SPEED;
     
@@ -229,46 +231,6 @@ public class Sprite implements Serializable {
     @Override
     public String toString() {
         return "entities.Sprite[ id=" + id + " ]";
-    }
-    
-        /**
-     * Update existing sprite in RESTful web services unless all values are not null.
-     * @param old an existing sprite
-     * @return an updated sprite
-     */
-    public Sprite updates(Sprite old){
-        if(this.panelWidth>=0)
-            old.panelWidth = this.panelWidth;
-
-        if(this.panelHeight>=0)
-            old.panelHeight = this.panelHeight;
-
-        if(this.x>=0)
-           old.x = this.x;
-        if(this.y>=0)
-            old.y = this.y;
-
-        old.dx = this.dx;
-        old.dy = this.dy;
-
-        old.color = this.color;
-
-        return old;
-    }
-    
-    
-    /**
-     * Check for null to auto generate sprite in RESTful web services.
-     * If there are null values in a sprite, change with default values.
-     */
-    public void checkNull() {
-        panelHeight = 500;
-        panelWidth = 500;
-        x = 0;
-        y = 0;
-        dx = 0;
-        dy = 0;
-        color = Color.BLUE;
     }
 
 }

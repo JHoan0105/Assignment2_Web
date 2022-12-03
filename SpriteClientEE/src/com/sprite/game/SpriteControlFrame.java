@@ -10,6 +10,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.stream.Stream;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -61,8 +63,8 @@ public class SpriteControlFrame extends JFrame implements Runnable, ActionListen
 	
 	String spriteid;
 	int spriteIndex;
-	int x;
-	int y;
+	int x=gameHeight/2;
+	int y=gameHeight/2;
 	int dx=0;
 	int dy=0;
 	Color c = Color.RED;
@@ -99,8 +101,18 @@ public class SpriteControlFrame extends JFrame implements Runnable, ActionListen
 			tmp2=sId.getComponentCount();
 			if(tmp!=tmp2) {
 				sId.removeAll();
+				
 				for(int i=0;i<sprites.size();i++) {
-					this.addItemComboBox(sprites.get(i).toString());
+					mutator = new StringBuilder();
+					String[] tmpnum = sprites.get(i).toString().split("=|\\s");
+					Long num = Long.parseLong(tmpnum[2]);
+					mutator.append("ID: "+num+ " ");
+					mutator.append("SpeedX: "+sprites.get(i).getDx()+" ");
+					mutator.append("SpeedY: "+sprites.get(i).getDy()+" ");
+					String[] str = sprites.get(i).getColor().toString().split("\\[|\\]");
+					mutator.append("Color: "+str[1]+"  ");
+					
+					this.addItemComboBox(mutator.toString());
 				}
 			}
 			sprite = new Sprite();
@@ -110,8 +122,8 @@ public class SpriteControlFrame extends JFrame implements Runnable, ActionListen
 			sprite.setX(x);
 			sprite.setY(y);
 			
-			String[] ss = spriteid.split("=|\\s");
-			Long num = Long.parseLong(ss[2]);
+			String[] ss = spriteid.split("=|\\s");	
+			Long num = Long.parseLong(ss[1]);
 			sprite.setId(num);
 			try {
 				session.setSprite(num, sprite);
@@ -153,8 +165,18 @@ public class SpriteControlFrame extends JFrame implements Runnable, ActionListen
 				
 				sprites = session.getSpriteList();
 				if (listNum == 0) {
+					
 					for(int i=0;i<sprites.size();i++) {
-						this.addItemComboBox(sprites.get(i).toString());
+						mutator = new StringBuilder();
+						String[] tmpnum = sprites.get(i).toString().split("=|\\s");
+						Long num = Long.parseLong(tmpnum[2]);
+						mutator.append("ID: "+num+ " ");
+						mutator.append("SpeedX: "+ Integer.toString(sprites.get(i).getDx()) +"  ");
+						mutator.append("SpeedY: "+ Integer.toString(sprites.get(i).getDy())+"  ");
+						String[] str = sprites.get(i).getColor().toString().split("\\[|\\]");
+						mutator.append("Color: "+str[1]+"  ");
+						
+						this.addItemComboBox(mutator.toString());
 					}
 					listNum = sId.getComponentCount();
 				}

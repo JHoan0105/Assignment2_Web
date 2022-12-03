@@ -33,7 +33,7 @@ public class Authentication {
 			try(InputStream os = urlc.getInputStream()) {
 				int choice;
 				while( (choice=os.read())!= -1) {
-					System.out.print((char)choice);
+					//System.out.print((char)choice);
 				}
 			}
 			success = true;

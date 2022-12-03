@@ -64,7 +64,9 @@ public class SpriteGame {
     public void editSprite(Long id,Sprite newsprite){
         spriteFacade.edit(id,newsprite);
     }
-    
+    public SpriteFacade getFacade(){
+        return spriteFacade;
+    }
 
     @PostConstruct
     public void go() {

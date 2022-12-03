@@ -5,7 +5,10 @@
  */
 package cst8218.hoan0105.entity;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.persistence.EntityManager;
 
 /**
@@ -14,7 +17,7 @@ import javax.persistence.EntityManager;
  */
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
-
+ 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
@@ -60,5 +63,11 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
+    public T findRandom() {
+        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+        cq.select(cq.from(entityClass));
+        Random r = new Random();
+        return (T) getEntityManager().createQuery(cq).getResultList().get(r.nextInt(this.count()));
+    }
     
-}
+} 

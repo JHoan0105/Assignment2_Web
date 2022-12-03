@@ -40,89 +40,6 @@ public class SpriteFacade extends AbstractFacade<Sprite> {
         super(Sprite.class);
     }
     
-      /**
-     * POST with an id to modify the existing sprite.
-     * @param id the id from the url 
-  
-     
-    @POST
-    @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Response modify(@PathParam("id") Long id, Sprite entity) throws Exception {
-        //check to see if the url field id or the id in the body request have been specified
-        if( id == null || entity.getId() == null) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("id was not specified").build();
-        }
-        //check to see if the id in the url field and id in the body are mismatched
-        else if(id.longValue() != entity.getId().longValue()) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("id mismatch").build();
-        }
-        else {
-            //if the sprite with given id exists, update the existing sprite
-            Sprite old = super.find(entity.getId());
-            if(old == null || super.find(id) == null) {
-                return Response.status(Response.Status.NOT_FOUND).entity("not found in database").build();
-            }
-            else {
-                entity.updates(old); //update non-null values         
-                super.edit(old);
-            }
-        }
-        return Response.status(Response.Status.OK).entity(super.find(entity.getId())).build();
-    }//end modify
-    
-        /**
-     * POST on the root resource (sprite table) to create a new sprite or update the existing sprite.
-    
-     */
- /*   
-    @POST
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Response modifyRoot(Sprite entity) throws Exception {
-        if(entity.getId() == null) {
-            //entity.checkNull(); //uncomment this to change null values to default values.
-            super.create(entity);
-            return Response.status(Response.Status.CREATED).entity(super.find(entity.getId())).build();
-        }
-        else {
-            Sprite old = super.find(entity.getId());
-            if(old == null) {
-                return Response.status(Response.Status.NOT_FOUND).entity("not found in database").build();
-            }
-            else {
-                entity.updates(old);
-                super.edit(old);
-            }
-        }
-        return Response.status(Response.Status.OK).entity(super.find(entity.getId())).build();
-    }//end modifyRoot
-    
-    @PUT
-    @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Response edit(@PathParam("id") Long id, Sprite entity) throws Exception {
-        if(id == null || entity.getId() == null) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("id was not specified").build();
-        }
-        else if(id.longValue() != entity.getId().longValue()) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("id mismatch").build();
-        } 
-        else {
-            Sprite old = super.find(entity.getId());
-            if(old == null || super.find(id) == null) {
-               return Response.status(Response.Status.NOT_FOUND).entity("not found in database").build();
-            }
-            else {
-               
-                super.edit(entity); //if the new value is null it still store into the data
-            }
-        }   
-       return Response.status(Response.Status.OK).entity(super.find(entity.getId())).build(); 
-    }//end edit
-*/
     @Asynchronous
     @javax.ws.rs.POST
     @Override
@@ -175,6 +92,14 @@ public class SpriteFacade extends AbstractFacade<Sprite> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+    
+    @javax.ws.rs.GET
+    @javax.ws.rs.Path("random")
+    @javax.ws.rs.Produces({javax.ws.rs.core.MediaType.APPLICATION_XML, javax.ws.rs.core.MediaType.APPLICATION_JSON})
+    @Override
+    public Sprite findRandom() {
+        return super.findRandom();
     }
     
 }
